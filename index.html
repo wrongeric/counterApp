@@ -32,18 +32,27 @@ http://youtu.be/TtMHhqrYf90
 
 	var counter = 0;
 	var timerID = null;
-	$("#displayArea").on('click',/*give the click handler a function that will increase the counter*/);
+	$("#displayArea").on('click', increaseCounter);             /*give the click handler a function that will increase the counter*/
 	$("#displayArea").on('mouseout',handleMouseout);
 	$("#displayArea").on('mouseover',handleMouseover);
 
 
 
 	function increaseCounter(){
+	    counter++;
+	    updateDisplay();
 	  //increase the counter global variable by 1, then save the value back into counter
 	  //call the function that updates the span in the displayArea div
 	}
 
 	function decreaseCounter(){
+	    if (counter <= 0){
+	        handleMouseover();
+	        counter = 0;
+        } else {
+	        counter--;
+	        updateDisplay();
+        }
 	  {//if the counter global variable is less than or equal to 0
 	    //call the handleMouseover function
 	    //set the counter global variable to 0
@@ -54,15 +63,17 @@ http://youtu.be/TtMHhqrYf90
 	}
 
 	function updateDisplay(){
+        $("#displayArea > span").text(counter)
 	  //change the text of the span inside the div.  The div has an id of displayArea.  The text will be changed to the value currently inside the global variable of counter
 	}
 
-	function handleMouseout()
-	{
+	function handleMouseout() {
+        setInterval( decreaseCounter, 500)
 	  //call the setInterval function (it is a default function, not one defined here).  pass in the following 2 parameters: the name of the function that decreases the counter, and 500.   setInterval returns a value, save that value in the global variable "timerID"
 	}
 
 	function handleMouseover(){
+        clearTimeout( timerID )
 		//call the clearTimeout function (not defined here, it is available by default.  pass in the global variable timerID as an argument
 	}	
 </script>
